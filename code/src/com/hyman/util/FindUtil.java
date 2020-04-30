@@ -17,26 +17,24 @@ public class FindUtil {
      * @return 元素所在位置
      */
     public static int  middleFind(int[] obj,int left ,int right ,int value){
-        if(obj.length <= 0){
-            return 0;
+        if(left <= right){
+            int middle = (left + right)/2;
+            if(obj[middle] == value){
+               return middle;
+            } else if (obj[middle] > value){
+               return middleFind(obj,left,middle-1,value);
+            } else if (obj[middle] < value){
+                return middleFind(obj,middle+1,right,value);
+            }
         }
-        int middle = (left + right)/2;
-        if(obj[middle] == value){
-            System.out.println(middle);
-            return middle;
-        } else if (obj[middle] > value){
-            middleFind(obj,left,middle-1,value);
-        } else if (obj[middle] < value){
-            middleFind(obj,middle+1,right,value);
-        }
-        return middle;
+        return -1;
     }
 
     public static void main(String[] args) {
         int[] test = {12,34,5654,45,4562,342,24,65,23};
         Arrays.sort(test);
         System.out.println(Arrays.toString(test));
-        int result = FindUtil.middleFind(test,0,test.length-1,45);
+        int result = FindUtil.middleFind(test,0,test.length-1,342);
         System.out.println(result);
     }
 }
